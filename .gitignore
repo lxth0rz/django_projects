@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 dj_imdb_quotes/my_mapper.txt
+dj_imdb_quotes/movies_quotes/quotes_app/migrations/0001_initial.py
