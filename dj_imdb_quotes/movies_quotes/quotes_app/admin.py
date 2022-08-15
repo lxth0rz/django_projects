@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Keyword, Quote
+
+admin.site.register(Keyword)
+
+admin.site.register(Quote)
+
