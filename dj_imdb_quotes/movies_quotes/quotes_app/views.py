@@ -8,11 +8,8 @@ from .models import Keyword
 
 def index(request):
     latest_keyword_list = Keyword.objects.order_by('-pub_date')[:5]
-    template = loader.get_template('quotes_app/index.html')
-    context = {
-        'latest_keyword_list': latest_keyword_list,
-    }
-    return HttpResponse(template.render(context, request))
+    context = {'latest_keyword_list': latest_keyword_list}
+    return render(request, 'quotes_app/index.html', context)
 
 
 def detail(request, keyword_id):
