@@ -1,1 +1,6 @@
-{{ keyword }}
+<h1>{{ keyword.keyword_text }}</h1>
+<ul>
+{% for quote in keyword.quote_set.all %}
+    <li>{{ quote.quote_text }}</li>
+{% endfor %}
+</ul>
