@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 
 from django.http import HttpResponse
@@ -14,10 +14,7 @@ def index(request):
 
 
 def detail(request, keyword_id):
-    try:
-        keyword = Keyword.objects.get(pk=keyword_id)
-    except Keyword.DoesNotExist:
-        raise Http404("Keyword does not exist")
+    keyword = get_object_or_404(Keyword, pk=keyword_id)
     return render(request, 'quotes_app/detail.html', {'keyword': keyword})
 
 
