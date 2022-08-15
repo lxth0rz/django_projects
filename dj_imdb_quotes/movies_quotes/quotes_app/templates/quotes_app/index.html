@@ -1,0 +1,9 @@
+{% if latest_keyword_list %}
+    <ul>
+    {% for keyword in latest_keyword_list %}
+        <li><a href="/quotes_app/{{ keyword.id }}/">{{ keyword.keyword_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No keywords are available.</p>
+{% endif %}
