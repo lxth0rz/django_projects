@@ -1,0 +1,10 @@
+<h1>{{ keyword.keyword_text }}</h1>
+
+<ul>
+{% for quote in keyword.quote_set.all %}
+    <li>{{ quote.quote_text }} -- {{ quote.votes }} vote{{ quote.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<p> {{ keyword.keyword_id}}</p>
+<a href="{% url 'quotes_app:detail' keyword.id %}">Vote again?</a>

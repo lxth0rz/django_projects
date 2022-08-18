@@ -4,3 +4,17 @@
     <li>{{ quote.quote_text }}</li>
 {% endfor %}
 </ul>
+
+
+<form action="{% url 'quotes_app:vote' keyword.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>{{ keyword.keyword_text }}</h1></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% for quote in keyword.quote_set.all %}
+        <input type="radio" name="quote" id="quote{{ forloop.counter }}" value="{{ quote.id }}">
+        <label for="quote{{ forloop.counter }}">{{ quote.quote_text }}</label><br>
+    {% endfor %}
+</fieldset>
+<input type="submit" value="Vote">
+</form>
