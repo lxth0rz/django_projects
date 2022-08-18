@@ -7,6 +7,7 @@ from django.template import loader
 from .models import Keyword, Quote
 from django.urls import reverse
 
+from django.db.models import F
 
 def index(request):
     latest_keyword_list = Keyword.objects.order_by('-pub_date')[:5]
@@ -36,7 +37,7 @@ def vote(request, keyword_id):
             'error_message': "You didn't select a quote.",
         })
     else:
-        selected_quote.votes += 1
+        selected_quote.votes = F('votes') + 1
         selected_quote.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
