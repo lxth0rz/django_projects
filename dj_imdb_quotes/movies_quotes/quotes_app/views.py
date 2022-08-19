@@ -6,8 +6,10 @@ from django.template import loader
 
 from .models import Keyword, Quote
 from django.urls import reverse
+from django.views import generic
 
 from django.db.models import F
+
 
 def index(request):
     latest_keyword_list = Keyword.objects.order_by('-pub_date')[:5]
@@ -15,14 +17,33 @@ def index(request):
     return render(request, 'quotes_app/index.html', context)
 
 
+class IndexView(generic.ListView):
+    template_name = 'quotes_app/index.html'
+    context_object_name = 'latest_KKKeywordosdd_list'
+
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return Keyword.objects.order_by('-pub_date')[:5]
+
+
 def detail(request, keyword_id):
     keyword = get_object_or_404(Keyword, pk=keyword_id)
     return render(request, 'quotes_app/detail.html', {'keyword': keyword})
 
 
+class DetailView(generic.DetailView):
+    model = Keyword
+    template_name = 'quotes_app/detail.html'
+
+
 def results(request, keyword_id):
     keyword = get_object_or_404(Keyword, pk=keyword_id)
     return render(request, 'quotes_app/results.html', {'keyword': keyword})
+
+
+class ResultsView(generic.DetailView):
+    model = Keyword
+    template_name = 'quotes_app/results.html'
 
 
 def vote(request, keyword_id):
