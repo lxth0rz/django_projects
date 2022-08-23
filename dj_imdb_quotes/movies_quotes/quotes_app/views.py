@@ -19,7 +19,7 @@ def index(request):
 
 class IndexView(generic.ListView):
     template_name = 'quotes_app/index.html'
-    context_object_name = 'latest_KKKeywordosdd_list'
+    context_object_name = 'latest_keyword_list'
 
     def get_queryset(self):
         """Return the last five published questions."""
